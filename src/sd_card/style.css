@@ -1,0 +1,60 @@
+.form {
+  width: 600px;
+  height: 450px;
+  border: 3px solid rgb(0, 117, 178);
+  background: rgb(6, 144, 207);
+  color: #fff;
+}
+
+td{color: #fff}
+
+h2 {
+  font-family: Arial;
+  font-weight: normal;
+  margin: 20px;
+  text-align: center
+}
+h3 {
+  font-family: Arial;
+  font-weight: normal;
+  margin: 15px;
+  text-align: center
+}
+
+.button_disabled {color: #fff; /* цвет текста */
+  background: rgb(212, 75, 56);/* фон кнопки */
+  border: none; /* не показывать границу */
+  border-radius:5px; /* закругление углов */
+  cursor: pointer /* ставим другой курсор */
+  }
+
+.button_disabled:hover {background: rgb(232, 95, 76);}/* при наведении курсора мышки */
+.button_disabled:active {background: rgb(152, 15, 0);}/* при нажатии */
+
+.button_enabled {color: #000; /* цвет текста */
+  background: rgb(17,237,105); /* фон кнопки */
+  border: none; /* не показывать границу */
+  border-radius:5px; /* закругление углов */
+  cursor: pointer /* ставим другой курсор */
+  }
+
+.button_enabled:hover { background: rgb(94,242,153); } /* при наведении курсора мышки */
+.button_enabled:active { background: rgb(84,184,124); } /* при нажатии */
+
+.rangeP {  /* линия, по которой он ездит в Firefox */
+  background: none;
+  border: none;
+}
+.rangeP {  /* контейнер */
+  padding: 0;
+  border: 5px solid #ccc;
+  border-radius: 5px;
+  box-shadow: inset 0 1px #ccc, inset 0 1px 1px #575555, inset 0 -2px #ccc;
+  background: #fff linear-gradient(#BCBCBC, #fff0f5);
+  overflow: hidden;
+}
+.rangeP::-moz-range-thumb {  /* ползунок в Firefox */
+  border-radius: 2px;
+  cursor: pointer /* ставим другой курсор */
+}
+
