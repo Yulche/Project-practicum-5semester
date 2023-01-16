@@ -1,0 +1,17 @@
+/spi/
+sd-card       4
+ss(slave)    10
+mosi  icsp4  11
+miso  icsp1  12
+sck          13
+
+
+led red  8
+dht22    2
+
+
+/i2c/
+vcc  
+gnd
+scl  a5
+sda  a4

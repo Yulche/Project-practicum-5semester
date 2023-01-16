@@ -1,0 +1,97 @@
+<html>
+	<head>
+    <meta http-equiv='content-type' content='text/html; charset=UTF-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <title>Sweet home</title>
+    <link type="text/css" rel="StyleSheet" href="style.css" />
+    <script>
+        function GetFlameState() 
+        {
+          nocache = "&nocache=" + Math.random() * 1000000;
+          var request = new XMLHttpRequest();
+          request.onreadystatechange = function() {
+            if (this.readyState == 4) 
+            {
+              if (this.status == 200) 
+              {
+                if (this.responseText != null) 
+                {
+                  var arrayOfStrings = this.responseText.split(":");
+
+                  document.getElementById("flame_txt").innerHTML = arrayOfStrings[0];
+                  document.getElementById("temp_txt").innerHTML = arrayOfStrings[1];
+                  document.getElementById("humid_txt").innerHTML = arrayOfStrings[2];
+                  for(var i = 1 ; i < 5 ; i++)
+                    if(arrayOfStrings[2+i] == "1")
+                      document.getElementById("led_"+i).setAttribute("class","button_enabled");
+                    else
+                      document.getElementById("led_"+i).setAttribute("class","button_disabled");
+                }
+              }
+            }
+          }
+          request.open("GET", "ajax_flame" + nocache, true);
+          request.send(null);
+          setTimeout('GetFlameState()', 1000);
+        }
+        
+      function onClick(pin)
+      {
+        var request = new XMLHttpRequest();
+        request.open("GET", "\setpin?canal=" + pin , false);
+        request.send(null);
+      }
+      
+      function PWM()
+      {
+        value = document.getElementById("led_PWM").value;
+        var request = new XMLHttpRequest();
+        request.open("GET", "\setpin?canal=5?value=" + value, false);
+        request.send(null);
+      }
+    </script>
+	</head>
+
+	<body onload="GetFlameState()">
+    <div class="form">
+      <h2>Sweet home</h2>
+      <hr noshade size="1px" color="white">
+      <h3>Датчики</h3>
+      <table align="center">
+        <tr>
+        <td><img src='flame.png' /></td>
+        <td valign="center">Датчик дым: </td>
+        <td><span id="flame_txt"> 0</span></td>
+        </tr>
+
+        <tr>
+        <td><img src='temp.png' /></td>
+        <td valign="center">Температура:</td>
+        <td><span id="temp_txt">0</span> °C</td>
+        </tr>
+
+        <tr>
+        <td><img src='humid.png' /></td>
+        <td valign="center">Влажность:</td>
+        <td><span id="humid_txt">0</span> %</td>
+        </tr>
+      </table>
+      <center>
+        <hr noshade size="1px" color="white">
+        <h3>Управление нагрузками</h3>
+        <button type="button" id="led_1" class="button_disabled btn_new" onClick="onClick(1)">Реле №1</button>
+        <button type="button" id="led_2" class="button_disabled btn_new" onClick="onClick(2)">Реле №2</button>
+        <button type="button" id="led_3" class="button_disabled btn_new" onClick="onClick(3)">Реле №3</button>
+        <button type="button" id="led_4" class="button_disabled btn_new" onClick="onClick(4)">Реле №4</button><br>
+        <hr noshade size="1px" color="white">
+        <h3>Регулировка мощности</h3>
+        <input type="range" min="0" max="255" id="led_PWM" step="2.55" oninput="PWM()" value="0" class="rangeP">
+        <hr noshade size="1px" color="white">
+      </center>
+    </div>
+	</body>
+</html>
+
+
+
